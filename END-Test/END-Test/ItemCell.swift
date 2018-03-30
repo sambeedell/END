@@ -56,7 +56,6 @@ class ItemCell: UICollectionViewCell {
         return label
     }()
     
-    
     func setupView() {
         addSubview(imageView)
         addSubview(titleLabel)
@@ -67,10 +66,5 @@ class ItemCell: UICollectionViewCell {
         titleLabel.frame = CGRect(x: 0, y: frame.width + 2, width: frame.width, height: 20)
         colourLabel.frame = CGRect(x: 0, y: frame.width + 17, width: frame.width, height: 20)
         priceLabel.frame = CGRect(x: 0, y: frame.width + 32, width: frame.width, height: 20)
-        
-        
-        
     }
-    
-    
 }

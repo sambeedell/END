@@ -11,8 +11,8 @@ import UIKit
 class FeaturedMenuController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let titleCellID = "titleCellID"
-    private let categoryCellID = "categoryCell"
-    private let categoryCellWideID = "wideCategoryCell"
+    private let categoryCellID = "categoryCellID"
+    private let brandCellID = "brandCellID"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         
         collectionView?.register(TitleCell.self, forCellWithReuseIdentifier: titleCellID)
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: categoryCellID)
-        collectionView?.register(WideCategoryCell.self, forCellWithReuseIdentifier: categoryCellWideID)
+        collectionView?.register(BrandCell.self, forCellWithReuseIdentifier: brandCellID)
         
     }
     
@@ -28,7 +28,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
     
     // tell the collection view how many cells to make
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     // make a cell for each cell index path
@@ -44,7 +44,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
             return cell
         } else {
             // get a reference to our cell
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellWideID, for: indexPath as IndexPath) as! WideCategoryCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brandCellID, for: indexPath as IndexPath) as! BrandCell
             return cell
         }
         
@@ -61,9 +61,9 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         if indexPath.item == 0 {
             return CGSize(width:view.frame.width, height:view.frame.width)
         } else if indexPath.item == 1 {
-            return CGSize(width:view.frame.width, height:400)
+            return CGSize(width:view.frame.width, height:470)
         } else {
-            return CGSize(width:view.frame.width, height:150)
+            return CGSize(width:view.frame.width, height:(220 * 5))
         }
     }
     
@@ -87,13 +87,15 @@ class TitleCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "deleteme")
+        iv.image = UIImage(named: "titleme")
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
     func setupView() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        //imageView.image?.size = CGRectMake(0, 0, self.frame.width, )
         addSubview(imageView)
         // Expand image view to frame
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageView]))
@@ -101,39 +103,4 @@ class TitleCell: UICollectionViewCell {
     }
 }
 
-class WideCategoryCell: CategoryCell {
-    
-    private let itemCellLargeID = "largeItemCellID"
-    
-    override func setupView() {
-        super.setupView()
-        itemsCollectionView.register(LargeItemCell.self, forCellWithReuseIdentifier: itemCellLargeID)
-    }
-    
-    // make a cell for each cell index path
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellLargeID, for: indexPath as IndexPath) as! LargeItemCell
-        
-        // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        //        cell.myLabel.text = self.items[indexPath.item]
-        //        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
-        
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: (frame.height / 2) - 32)
-    }
-    
-    private class LargeItemCell: ItemCell {
-        override func setupView() {
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(imageView)
-            // Expand image view to frame
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageView]))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageView]))
-        }
-    }
-}
+

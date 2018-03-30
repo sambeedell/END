@@ -1,16 +1,17 @@
 //
-//  CategoryCell.swift
+//  BrandCell.swift
 //  END-Test
 //
-//  Created by Sam Beedell on 21/03/2018.
+//  Created by Sam Beedell on 30/03/2018.
 //  Copyright © 2018 Sam Beedell. All rights reserved.
 //
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private let itemCellIdentifier = "itemCell"
+    private let brandCellIdentifier = "brandCell"
+    private let collectionViewCount = 5
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,20 +22,21 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
         fatalError("init(coder:) has not been implemented")
     }
     
-    let categoryLabel: UILabel = {
+    let brandLabel: UILabel = {
         let label = UILabel()
-        label.text = "LATEST"
+        label.text = "BRANDS"
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let itemsCollectionView: UICollectionView = {
+    let brandsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        //layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.isUserInteractionEnabled = false
         return collectionView
     }()
     
@@ -44,42 +46,38 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
         self.backgroundColor = .clear
         
         // Add subviews
-        addSubview(categoryLabel)
+        addSubview(brandLabel)
         
         // Add collection view inside cell
-        addSubview(itemsCollectionView)
+        addSubview(brandsCollectionView)
         
         // Connect itemsCollectionView to class
-        itemsCollectionView.delegate = self
-        itemsCollectionView.dataSource = self
+        brandsCollectionView.delegate = self
+        brandsCollectionView.dataSource = self
         
         // Register collectionView Cell
-        itemsCollectionView.register(ItemCell.self, forCellWithReuseIdentifier: itemCellIdentifier)
-        
-        // Formats for constraints
-        //let unpadded = "[v0]"
-        //let padded = "-8-[v0]-8-"
+        brandsCollectionView.register(BrandItemCell.self, forCellWithReuseIdentifier: brandCellIdentifier)
         
         // Expand horizontally from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-14-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": categoryLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": brandsCollectionView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-14-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": brandLabel]))
         
         // Exapnd vertically from top to bottom edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0(30)][v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": categoryLabel, "v1": itemsCollectionView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0(30)][v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": brandLabel, "v1": brandsCollectionView]))
     }
     
     // MARK: - UICollectionViewDataSource protocol
     
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return collectionViewCount
     }
     
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellIdentifier, for: indexPath as IndexPath) as! ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brandCellIdentifier, for: indexPath as IndexPath) as! BrandItemCell
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         //        cell.myLabel.text = self.items[indexPath.item]
@@ -92,17 +90,26 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        print("You selected brand cell #\(indexPath.item)!")
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 14, 0, 14)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsetsMake(0, 14, 0, 14)
+//    }
     
     // MARK: - UICollectionViewFlowLayout protocol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: (frame.height / 2) - 32)
+        return CGSize(width: frame.size.width, height: (220) - 32)
+    }
+    
+    private class BrandItemCell: ItemCell {
+        override func setupView() {
+            imageView.image = UIImage(named: "brandme")
+            addSubview(imageView)
+            
+            imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 220 - 35)
+        }
     }
     
 }
