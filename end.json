@@ -1,7 +1,10 @@
 {
   "contents": {
-    "titleImage": "title",
     "categories": [
+      {
+        "name" : "TITLE",
+        "image": "title"
+      }
       {
         "name": "LATEST",
         "items": [
