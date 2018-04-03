@@ -18,6 +18,8 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        setupNavigationBarItems()
+        
         collectionView?.register(TitleCell.self, forCellWithReuseIdentifier: titleCellID)
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: categoryCellID)
         collectionView?.register(BrandCell.self, forCellWithReuseIdentifier: brandCellID)
@@ -74,6 +76,45 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         // TODO: Caching...
     }
 }
+
+extension FeaturedMenuController {
+    
+    func setupNavigationBarItems() {
+        setupRightNavItems()
+        setupLeftNavItems()
+        setupRemainingNavItems()
+    }
+    
+    private func setupRightNavItems() {
+        let searchButton = UIButton(type: .system)
+        searchButton.setImage(#imageLiteral(resourceName: "searchme").withRenderingMode(.alwaysOriginal), for: .normal)
+        searchButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        let basketButton = UIButton(type: .system)
+        basketButton.setImage(#imageLiteral(resourceName: "bagme").withRenderingMode(.alwaysOriginal), for: .normal)
+        basketButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: basketButton), UIBarButtonItem(customView: searchButton)]
+    }
+    
+    private func setupLeftNavItems() {
+        let menuButton = UIButton(type: .system)
+        menuButton.setImage(#imageLiteral(resourceName: "menume").withRenderingMode(.alwaysOriginal), for: .normal)
+        menuButton.frame = CGRect(x: 0, y: 0, width: 34, height: 17)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+    }
+    
+    private func setupRemainingNavItems() {
+        let titleImageView = UIImageView(image: #imageLiteral(resourceName: "tempme"))
+        titleImageView.frame = CGRect(x: 0, y: 0, width: 34, height: 60)
+        titleImageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = titleImageView
+        
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+    }
+}
+
 
 class TitleCell: UICollectionViewCell {
     override init(frame: CGRect) {
