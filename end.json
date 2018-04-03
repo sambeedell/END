@@ -3,7 +3,12 @@
     "categories": [
       {
         "name" : "TITLE",
-        "image": "title"
+        "type" : "extralarge",
+        "items": [
+          {
+            "image": "title"
+          }
+        ]
       }
       {
         "name": "LATEST",
@@ -84,22 +89,19 @@
       },
       {
         "name": "BRANDS",
+        "type": "large",
         "items": [
           {
-            "image": "A",
-            "type": "large"
+            "image": "A"
           },
           {
-            "image": "B",
-            "type": "large"
+            "image": "B"
           },
           {
-            "image": "C",
-            "type": "large"
+            "image": "C"
           },
           {
-            "image": "D",
-            "type": "large"
+            "image": "D"
           }
         ]
       }
