@@ -1,94 +1,102 @@
 {
-  "contents": {
-    "titleImage": "title",
-    "latest": [
-      {
-        "title": "OYO",
-        "colour": "White Striped",
-        "price": "10.99",
-        "image": "a"
-      },
-      {
-        "title": "Prospect",
-        "colour": "Grey Mesh",
-        "price": "100.99",
-        "image": "b"
-      },
-      {
-        "title": "Carhart",
-        "colour": "Blue",
-        "price": "1099.99",
-        "image": "c"
-      },
-      {
-        "title": "Watanabe Man",
-        "colour": "Dark Grey",
-        "price": "101.99",
-        "image": "d"
-      },
-      {
-        "title": "Crocked Jacket",
-        "colour": "Khaki",
-        "price": "409.99",
-        "image": "e"
-      },
-      {
-        "title": "Boring",
-        "colour": "Black",
-        "price": "105.99",
-        "image": "f"
-      },
-      null,
-      {
-        "title": "A.P.C Shirt",
-        "colour": "Cream",
-        "price": "798.99",
-        "image": "g"
-      },
-      {
-        "title": "NYC Jumper",
-        "colour": "White",
-        "price": "909.99",
-        "image": "h"
-      },
-      {
-        "title": "A.P.C Polo",
-        "colour": "White, Blue Striped",
-        "price": "659.99",
-        "image": "i"
-      },
-      {
-        "title": "Norsey Trondheim",
-        "colour": "Murky Green",
-        "price": "1054.99",
-        "image": "j"
-      },
-      {
-        "title": "Billie Jeans",
-        "colour": "Not my colour",
-        "price": "702.99",
-        "image": "k"
-      },
-      {
-        "title": "Beautiful Coat",
-        "colour": "Matt Black",
-        "price": "9999.99",
-        "image": "l"
-      }
-    ],
-    "brands": [
-      {
-        "image": "A"
-      },
-      {
-        "image": "B"
-      },
-      {
-        "image": "C"
-      },
-      {
-        "image": "D"
-      }
-    ]
-  }
+  "contents": {
+    "titleImage": "title",
+    "categories": [
+      {
+        "name": "LATEST",
+        "items": [
+          {
+            "title": "OYO",
+            "colour": "White Striped",
+            "price": "10.99",
+            "image": "a"
+          },
+          {
+            "title": "Prospect",
+            "colour": "Grey Mesh",
+            "price": "100.99",
+            "image": "b"
+          },
+          {
+            "title": "Carhart",
+            "colour": "Blue",
+            "price": "1099.99",
+            "image": "c"
+          },
+          {
+            "title": "Watanabe Man",
+            "colour": "Dark Grey",
+            "price": "101.99",
+            "image": "d"
+          },
+          {
+            "title": "Crocked Jacket",
+            "colour": "Khaki",
+            "price": "409.99",
+            "image": "e"
+          },
+          {
+            "title": "Boring",
+            "colour": "Black",
+            "price": "105.99",
+            "image": "f"
+          },
+          null,
+          {
+            "title": "A.P.C Shirt",
+            "colour": "Cream",
+            "price": "798.99",
+            "image": "g"
+          },
+          {
+            "title": "NYC Jumper",
+            "colour": "White",
+            "price": "909.99",
+            "image": "h"
+          },
+          {
+            "title": "A.P.C Polo",
+            "colour": "White, Blue Striped",
+            "price": "659.99",
+            "image": "i"
+          },
+          {
+            "title": "Norsey Trondheim",
+            "colour": "Murky Green",
+            "price": "1054.99",
+            "image": "j"
+          },
+          {
+            "title": "Billie Jeans",
+            "colour": "Not my colour",
+            "price": "702.99",
+            "image": "k"
+          },
+          {
+            "title": "Beautiful Coat",
+            "colour": "Matt Black",
+            "price": "9999.99",
+            "image": "l"
+          }
+        ]
+      },
+      {
+        "name": "BRANDS",
+        "items": [
+          {
+            "image": "A"
+          },
+          {
+            "image": "B"
+          },
+          {
+            "image": "C"
+          },
+          {
+            "image": "D"
+          }
+        ]
+      }
+    ]
+  }
 }
