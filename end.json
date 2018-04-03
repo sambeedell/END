@@ -83,16 +83,20 @@
         "name": "BRANDS",
         "items": [
           {
-            "image": "A"
+            "image": "A",
+            "type": "large"
           },
           {
-            "image": "B"
+            "image": "B",
+            "type": "large"
           },
           {
-            "image": "C"
+            "image": "C",
+            "type": "large"
           },
           {
-            "image": "D"
+            "image": "D",
+            "type": "large"
           }
         ]
       }
