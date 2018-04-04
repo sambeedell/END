@@ -92,16 +92,16 @@
         "type": "large",
         "items": [
           {
-            "image": "A"
+            "image": "A-1"
           },
           {
-            "image": "B"
+            "image": "B-1"
           },
           {
-            "image": "C"
+            "image": "C-1"
           },
           {
-            "image": "D"
+            "image": "D-1"
           }
         ]
       }
