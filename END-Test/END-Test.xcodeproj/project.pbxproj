@@ -16,6 +16,7 @@
 		603DA12A2063220900DD5FE1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603DA1292063220900DD5FE1 /* CategoryCell.swift */; };
 		603DA12C2063CACC00DD5FE1 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603DA12B2063CACC00DD5FE1 /* ItemCell.swift */; };
 		6065D0C1206EE17F00A89D99 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065D0C0206EE17F00A89D99 /* BrandCell.swift */; };
+		60E976352073C4960049733C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E976342073C4960049733C /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		603DA1292063220900DD5FE1 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		603DA12B2063CACC00DD5FE1 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		6065D0C0206EE17F00A89D99 /* BrandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
+		60E976342073C4960049733C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				603DA10720630A2A00DD5FE1 /* AppDelegate.swift */,
+				60E976342073C4960049733C /* Models.swift */,
 				603DA10920630A2A00DD5FE1 /* FeaturedMenuController.swift */,
 				603DA1292063220900DD5FE1 /* CategoryCell.swift */,
 				603DA12B2063CACC00DD5FE1 /* ItemCell.swift */,
@@ -213,6 +216,7 @@
 				6065D0C1206EE17F00A89D99 /* BrandCell.swift in Sources */,
 				603DA12C2063CACC00DD5FE1 /* ItemCell.swift in Sources */,
 				603DA10A20630A2A00DD5FE1 /* FeaturedMenuController.swift in Sources */,
+				60E976352073C4960049733C /* Models.swift in Sources */,
 				603DA10820630A2A00DD5FE1 /* AppDelegate.swift in Sources */,
 				603DA12A2063220900DD5FE1 /* CategoryCell.swift in Sources */,
 			);

@@ -10,8 +10,15 @@ import UIKit
 
 class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var itemCategory: ItemCategory? {
+        didSet {
+            if let name = itemCategory?.name {
+                brandLabel.text = name
+            }
+        }
+    }
+    
     private let brandCellIdentifier = "brandCell"
-    private let collectionViewCount = 5
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +31,7 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
     
     let brandLabel: UILabel = {
         let label = UILabel()
-        label.text = "BRANDS"
+        label.text = "TEST"
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -70,7 +77,10 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
     
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionViewCount
+        if let count = itemCategory?.items?.count {
+            return count
+        }
+        return 0
     }
     
     // make a cell for each cell index path
@@ -78,10 +88,9 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
         
         // get a reference to our storyboard cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brandCellIdentifier, for: indexPath as IndexPath) as! BrandItemCell
-        
-        // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        //        cell.myLabel.text = self.items[indexPath.item]
-        //        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
+        if let image = itemCategory?.items?[indexPath.item].image {
+            cell.imageView.image = UIImage(named: image)
+        }
         
         return cell
     }
@@ -104,10 +113,12 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
     }
     
     private class BrandItemCell: ItemCell {
+        // TODO: Add brand image
         override func setupView() {
-            imageView.image = UIImage(named: "brandme")
+            // Reset default image
+            imageView.image = UIImage(named: "logo")
             addSubview(imageView)
-            
+            // Update constraints
             imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 220 - 35)
         }
     }

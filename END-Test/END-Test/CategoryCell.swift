@@ -10,6 +10,14 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var itemCategory: ItemCategory? {
+        didSet {
+            if let name = itemCategory?.name {
+                categoryLabel.text = name
+            }
+        }
+    }
+    
     private let itemCellIdentifier = "itemCell"
     
     override init(frame: CGRect) {
@@ -23,7 +31,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "LATEST"
+        label.text = "TEST"
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -72,7 +80,10 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     // tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if let count = itemCategory?.items?.count {
+            return count
+        }
+        return 0
     }
     
     // make a cell for each cell index path
@@ -82,8 +93,11 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellIdentifier, for: indexPath as IndexPath) as! ItemCell
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        //        cell.myLabel.text = self.items[indexPath.item]
-        //        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
+        if let item = itemCategory?.items?[indexPath.item] {
+            cell.item = item
+        } else {
+            print("error setting item")
+        }
         
         return cell
     }

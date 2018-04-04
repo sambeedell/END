@@ -10,6 +10,23 @@ import UIKit
 
 class ItemCell: UICollectionViewCell {
     
+    var item: Item? {
+        didSet {
+            if let title = item?.title {
+                titleLabel.text = title
+            }
+            if let colour = item?.colour {
+                colourLabel.text = colour
+            }
+            if let price = item?.price {
+                priceLabel.text = "£\(price)"
+            }
+            if let imageName = item?.image {
+                imageView.image = UIImage(named: imageName)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -23,7 +40,7 @@ class ItemCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "deleteme")
+        iv.image = UIImage(named: "a")
         iv.contentMode = .scaleAspectFill
         return iv
     }()
