@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol CategoryCellDelegate: class {
+    func itemPressedFor(cell: CategoryItemCell)
+}
+
+// TODO: This should never handle any business logic
 class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    var delegate: CategoryCellDelegate?
     
     var itemCategory: ItemCategory? {
         didSet {
@@ -62,7 +69,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
         itemsCollectionView.dataSource = self
         
         // Register collectionView Cell
-        itemsCollectionView.register(ItemCell.self, forCellWithReuseIdentifier: itemCellIdentifier)
+        itemsCollectionView.register(CategoryItemCell.self, forCellWithReuseIdentifier: itemCellIdentifier)
         
         // Formats for constraints
         //let unpadded = "[v0]"
@@ -90,7 +97,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellIdentifier, for: indexPath as IndexPath) as! ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellIdentifier, for: indexPath as IndexPath) as! CategoryItemCell
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
         if let item = itemCategory?.items?[indexPath.item] {
@@ -105,8 +112,10 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     // MARK: - UICollectionViewDelegate protocol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        // get selected image
+        if let cell = collectionView.cellForItem(at: indexPath) as? CategoryItemCell {
+            delegate?.itemPressedFor(cell: cell)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -120,3 +129,4 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDelegate, UICollection
     }
     
 }
+

@@ -102,9 +102,9 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
         print("You selected brand cell #\(indexPath.item)!")
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsetsMake(0, 14, 0, 14)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 14, 0, 14)
+    }
     
     // MARK: - UICollectionViewFlowLayout protocol
     
@@ -112,10 +112,11 @@ class BrandCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
         return CGSize(width: frame.size.width, height: (220) - 32)
     }
     
-    private class BrandItemCell: ItemCell {
-        // TODO: Add brand image
+    private class BrandItemCell: CategoryItemCell {
+        // Add brand image
         override func setupView() {
-            // Reset default image
+            // Configure default image
+            imageView.clipsToBounds = true
             imageView.image = UIImage(named: "logo")
             addSubview(imageView)
             // Update constraints

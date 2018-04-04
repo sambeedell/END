@@ -15,6 +15,9 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
     private let brandCellID = "brandCellID"
     
     var itemCategories: [ItemCategory]?
+    
+    let transition = PopAnimator()
+    var selectedImage: UIImageView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,10 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         ItemCategory.fetchItems { [weak self] (itemCategories) in
             self?.itemCategories = itemCategories
             self?.collectionView?.reloadData()
+        }
+        
+        transition.dismissCompletion = {
+            self.selectedImage!.isHidden = false
         }
         
         setupNavigationBarItems()
@@ -56,6 +63,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
             if let itemCategory = itemCategories?[indexPath.item] {
                 cell.itemCategory = itemCategory
             }
+            cell.delegate = self
             return cell
         } else {
             // get a reference to our cell
@@ -76,7 +84,10 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         } else if indexPath.item == 1 {
             return CGSize(width:view.frame.width, height:470)
         } else {
-            return CGSize(width:view.frame.width, height:(220 * 5))
+            if let count = itemCategories?[indexPath.item].items?.count {
+                return CGSize(width:view.frame.width, height:CGFloat(220 * count))
+            }
+            return CGSize(width:view.frame.width, height:220)
         }
     }
     
@@ -87,21 +98,58 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         // TODO: Caching...
     }
     
+    fileprivate func printOrientation() {
+        let orient = UIApplication.shared.statusBarOrientation
+        switch orient {
+        case .portrait:
+            print("Portrait")
+        case .landscapeLeft,.landscapeRight :
+            print("Landscape")
+        default:
+            print("Anything But Portrait")
+        }
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            let orient = UIApplication.shared.statusBarOrientation
-            switch orient {
-            case .portrait:
-                print("Portrait")
-            case .landscapeLeft,.landscapeRight :
-                print("Landscape")
-            default:
-                print("Anything But Portrait")
-            }
+            self.printOrientation()
         }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
+            // refresh view once rotation is completed (must be here to return correct frame)
+            DispatchQueue.main.async {
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+                self.collectionView?.reloadData()
+            }
         })
         super.viewWillTransition(to: size, with: coordinator)
+    }
+}
+
+extension FeaturedMenuController: CategoryCellDelegate, UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.originFrame = selectedImage!.superview!.convert(selectedImage!.frame, to: nil)
+        transition.presenting = true
+        selectedImage!.isHidden = true
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = false
+        return transition
+    }
+    
+    // Delegate method
+    func itemPressedFor(cell: CategoryItemCell) {
+        selectedImage = cell.imageView
+        
+        //present details view controller
+        let itemDetails = DetailViewController()
+        itemDetails.item = cell.item
+        
+        itemDetails.modalPresentationStyle = .overCurrentContext
+        itemDetails.transitioningDelegate = self // UIKit will now ask ViewController for an animator object
+        
+        present(itemDetails, animated: true, completion: nil)
     }
 }
 

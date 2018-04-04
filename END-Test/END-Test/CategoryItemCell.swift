@@ -1,5 +1,5 @@
 //
-//  ItemCell.swift
+//  CategoryItemCell.swift
 //  END-Test
 //
 //  Created by Sam Beedell on 22/03/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemCell: UICollectionViewCell {
+class CategoryItemCell: UICollectionViewCell {
     
     var item: Item? {
         didSet {
