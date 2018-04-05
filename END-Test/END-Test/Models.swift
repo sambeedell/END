@@ -61,6 +61,7 @@ class ItemCategory: NSObject {
     }
 }
 
+@objcMembers
 class Item: NSObject {
     var id: NSNumber?
     var title: String?

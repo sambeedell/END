@@ -23,18 +23,27 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         // Animation Code
         let containerView = transitionContext.containerView // this is where the animations take place
-        let toView = transitionContext.view(forKey: .to)! // access to transition players
-        
-        if presenting {
-            // Force a layout pass to ensure the frame is correct to the current device (not xib)
-            let w = UIScreen.main.bounds.width
-            let h = UIScreen.main.bounds.height
-            toView.frame = CGRect(x: 0 , y: 0 , width: w * 0.75, height: h * 0.75)
-            toView.center = CGPoint(x: w / 2, y: h / 2)
-        }
         
         // Pop Transition
-        let itemView = presenting ? toView : transitionContext.view(forKey: .from)!
+        //let itemView = presenting ? toView : transitionContext.view(forKey: .from)!
+        
+        // access to transition players
+        var itemView: UIView
+        if presenting {
+            guard let toView = transitionContext.view(forKey: .to) else {
+                print("no toView in custom 'Pop' segue animation script?")
+                return
+            }
+            // Force a layout pass to ensure the frame is correct to the current device (not xib)
+            toView.frame = UIScreen.main.bounds
+            itemView = toView
+        } else {
+            guard let fromView = transitionContext.view(forKey: .from) else {
+                print("no fromView in custom 'Pop' segue animation script?")
+                return
+            }
+            itemView = fromView
+        }
         
         let initialFrame = presenting ? originFrame : itemView.frame
         let finalFrame = presenting ? itemView.frame : originFrame
@@ -53,7 +62,7 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             itemView.clipsToBounds = true
         }
 
-        containerView.addSubview(toView)
+        containerView.addSubview(itemView)
         containerView.bringSubview(toFront: itemView)
         
         UIView.animate(withDuration: duration, delay:0.0,
