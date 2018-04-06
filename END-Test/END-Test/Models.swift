@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objcMembers
 class ItemCategory: NSObject {
     var name: String?
     var items: [Item]?
@@ -22,6 +23,7 @@ class ItemCategory: NSObject {
                 items?.append(item)
             }
         } else {
+            // TODO: Fix me
             super.setValue(value, forKey: key)
         }
     }

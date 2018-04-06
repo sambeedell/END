@@ -18,6 +18,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
     
     let transition = PopAnimator()
     var selectedImage: UIImageView?
+//    var blurEffectView: UIVisualEffectView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         
         transition.dismissCompletion = {
             self.selectedImage!.isHidden = false
+//            self.blurEffectView.removeFromSuperview()
         }
         
         setupNavigationBarItems()
@@ -38,6 +40,10 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: categoryCellID)
         collectionView?.register(BrandCell.self, forCellWithReuseIdentifier: brandCellID)
         
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//        blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = view.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     // MARK: - UICollectionViewDataSource protocol
@@ -111,16 +117,18 @@ class FeaturedMenuController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            self.printOrientation()
-        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            // refresh view once rotation is completed (must be here to return correct frame)
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [unowned self] _ -> Void in
+            //self.printOrientation()
             DispatchQueue.main.async {
                 self.collectionView?.collectionViewLayout.invalidateLayout()
                 self.collectionView?.reloadData()
             }
+        }, completion: { _ -> Void in
+            // refresh view once rotation is completed (must be here to return correct frame) -> causes jumpy UI?
+            
         })
-        super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
@@ -140,6 +148,10 @@ extension FeaturedMenuController: CategoryCellDelegate, UIViewControllerTransiti
     
     // Delegate method
     func itemPressedFor(cell: CategoryItemCell) {
+        
+        // Blur background
+//        view.addSubview(blurEffectView)
+        
         selectedImage = cell.imageView
         
         //present details view controller
@@ -150,6 +162,8 @@ extension FeaturedMenuController: CategoryCellDelegate, UIViewControllerTransiti
         itemDetails.transitioningDelegate = self // UIKit will now ask ViewController for an animator object
         
         present(itemDetails, animated: true, completion: nil)
+        
+        
     }
 }
 

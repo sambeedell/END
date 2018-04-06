@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-5K-guJ">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-5K-guJ">
                     <rect key="frame" x="50" y="94" width="275" height="634"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkh-5V-lCi">
@@ -52,10 +52,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp2-2G-rLA">
-                            <rect key="frame" x="14" y="371" width="247" height="200"/>
-                            <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Lbz-rL-2G8"/>
-                            </constraints>
+                            <rect key="frame" x="14" y="371" width="247" height="206"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -72,6 +69,7 @@
                         <constraint firstItem="EoK-aZ-JZi" firstAttribute="height" secondItem="Oj9-BN-FX1" secondAttribute="height" id="3c0-fQ-Mi1"/>
                         <constraint firstAttribute="trailing" secondItem="Oj9-BN-FX1" secondAttribute="trailing" constant="14" id="48r-ix-h44"/>
                         <constraint firstItem="Cp2-2G-rLA" firstAttribute="leading" secondItem="LeT-5K-guJ" secondAttribute="leading" constant="14" id="6el-HY-KOV"/>
+                        <constraint firstAttribute="bottom" secondItem="Cp2-2G-rLA" secondAttribute="bottom" constant="57" placeholder="YES" id="DZR-KV-vBV"/>
                         <constraint firstAttribute="trailing" secondItem="Cp2-2G-rLA" secondAttribute="trailing" constant="14" id="GlC-RR-HO0"/>
                         <constraint firstItem="EoK-aZ-JZi" firstAttribute="leading" secondItem="LeT-5K-guJ" secondAttribute="leading" constant="14" id="OUj-VI-eN6"/>
                         <constraint firstItem="k03-1Y-MBs" firstAttribute="leading" secondItem="LeT-5K-guJ" secondAttribute="leading" constant="14" id="R5c-RB-2qN"/>
@@ -92,10 +90,11 @@
                 </scrollView>
             </subviews>
             <constraints>
+                <constraint firstItem="LeT-5K-guJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="1TD-8q-x7x"/>
                 <constraint firstItem="LeT-5K-guJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="5PO-Nk-bIg"/>
-                <constraint firstItem="LeT-5K-guJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-50" id="BzI-D6-Q0o"/>
-                <constraint firstItem="LeT-5K-guJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="Wxn-dI-0mg"/>
+                <constraint firstItem="LeT-5K-guJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MNO-FD-w5U"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="LeT-5K-guJ" secondAttribute="bottom" constant="50" id="YwV-6G-nm0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LeT-5K-guJ" secondAttribute="trailing" constant="50" id="qbF-M0-ETj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="31.5" y="62"/>
